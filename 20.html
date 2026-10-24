@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刘昊维出生20周年</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 引入 Google Fonts 高端艺术字体：思源宋体精修版与 SF 等宽字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Serif+SC:wght@400;600;700;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            appleBg: '#ffffff',
+            appleDark: '#111827',
+            appleText: '#1d1d1f',
+            appleGray: '#86868b',
+            appleBlue: '#0071e3',
+            appleBlueLight: '#2997ff',
+            appleCyan: '#38bdf8',
+            glacierBg: '#F8FAFF',
+          },
+          fontFamily: {
+            display: ['"Noto Serif SC"', 'Cinzel', 'serif'],
+            mono: ['"SF Mono"', 'ui-monospace', 'Menlo', 'monospace'],
+            sans: ['"Outfit"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #1d1d1f;
+      overflow-x: hidden;
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* 苹果纯净天际冰川蓝微光背景 */
+    .apple-skyline {
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(186, 220, 255, 0.45) 0%, rgba(240, 246, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%),
+        radial-gradient(circle at 85% 30%, rgba(210, 235, 255, 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 15% 70%, rgba(225, 242, 255, 0.35) 0%, transparent 50%),
+        #ffffff;
+    }
+
+    /* 标题定制设计：高定液态水银铬金流光 (Liquid Chrome / Metallic Shimmer) */
+    .chrome-liquid-text {
+      font-family: "Noto Serif SC", serif;
+      background: linear-gradient(
+        110deg,
+        #0b1e38 0%,
+        #005bb5 22%,
+        #0071e3 35%,
+        #82c8ff 45%,
+        #ffffff 50%,
+        #82c8ff 55%,
+        #0071e3 65%,
+        #003c80 78%,
+        #0b1e38 100%
+      );
+      background-size: 280% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: metallicShimmer 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      letter-spacing: 0.08em;
+      text-shadow: 0 10px 40px rgba(0, 113, 227, 0.12);
+    }
+
+    @keyframes metallicShimmer {
+      0% {
+        background-position: 180% 0%;
+      }
+      100% {
+        background-position: -100% 0%;
+      }
+    }
+
+    /* 标题高定字符排版间距精修 */
+    .hero-title-sculpt {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    /* 物理级晶体毛玻璃卡片（带镜面指针跟随变量） */
+    .card-specular-wrapper {
+      position: relative;
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      box-shadow: 
+        0 30px 60px -15px rgba(0, 85, 255, 0.07),
+        0 10px 20px -5px rgba(0, 113, 227, 0.04),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      overflow: hidden;
+    }
+
+    .card-specular-wrapper:hover {
+      box-shadow: 
+        0 40px 80px -20px rgba(0, 113, 227, 0.16),
+        0 16px 32px -8px rgba(0, 85, 255, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 1) inset;
+    }
+
+    /* 光标动态跟随的径向镜面反光层 (Radial Specular Follow) */
+    .specular-shine {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(
+        550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 113, 227, 0.12) 0%,
+        rgba(56, 189, 248, 0.06) 30%,
+        transparent 70%
+      );
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1;
+    }
+
+    .card-specular-wrapper:hover .specular-shine {
+      opacity: 1;
+    }
+
+    /* 光标掠过边缘的光子流边框折射 (Border Specular Follow) */
+    .border-specular {
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1.5px;
+      pointer-events: none;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      background: radial-gradient(
+        350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 113, 227, 0.75) 0%,
+        rgba(56, 189, 248, 0.4) 40%,
+        rgba(0, 113, 227, 0.08) 80%,
+        rgba(0, 113, 227, 0.04) 100%
+      );
+      z-index: 2;
+    }
+
+    /* 边框巡游光子流 (Border Beam Streak) */
+    @keyframes beamRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .border-beam-container {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .border-beam-streak {
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 310deg,
+        rgba(0, 113, 227, 0.6) 340deg,
+        rgba(56, 189, 248, 0.95) 360deg
+      );
+      animation: beamRotate 7s linear infinite;
+    }
+
+    /* 等宽防抖数字 */
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 极细微秒刻度跳动条 */
+    .micro-ticker {
+      width: 2px;
+      height: 14px;
+      background: #0071e3;
+      display: inline-block;
+      animation: pulseTicker 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulseTicker {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+      50% { opacity: 1; transform: scaleY(1.1); }
+    }
+
+    /* 隐藏滚动条 */
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+  </style>
+</head>
+<body class="apple-skyline selection:bg-appleBlue selection:text-white">
+
+  <!-- 顶部超薄 Apple 极简悬浮状态栏 -->
+  <header class="fixed top-0 inset-x-0 z-50 h-14 bg-white/60 backdrop-blur-2xl border-b border-black/[0.03] flex items-center justify-between px-6 sm:px-12 transition-all">
+    <div class="flex items-center gap-3">
+      <span class="font-display font-bold text-sm tracking-widest text-appleDark">刘昊维</span>
+      <span class="h-3 w-px bg-black/10"></span>
+      <span class="text-[11px] font-mono text-appleBlue font-semibold tracking-wider">20TH ANNIVERSARY</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-xs font-mono text-appleGray">2027.02.25 00:00:00</span>
+      <div class="w-14 h-1 rounded-full bg-black/5 overflow-hidden hidden sm:block">
+        <div id="scrollProgressBar" class="h-full bg-appleBlue w-0"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       APPLE 官网级 连续滚动视差舞台 (Pinned Sticky Scrollytelling Stage)
+       容器全长 400vh，视口在首屏完美锁定，向下滑动单向平滑推拉
+       ======================================================== -->
+  <div id="scrollTrack" class="relative w-full h-[400vh]">
+    <div class="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
+
+      <!-- ------------------------------------------------------
+           STAGE 1: 首页核心 (100% 极致纯粹：仅标题与四大倒计时框，绝无杂质)
+           ------------------------------------------------------ -->
+      <section id="sceneHero" class="absolute inset-0 flex flex-col items-center justify-center px-6 will-change-transform z-20 pointer-events-auto">
+        
+        <!-- 雕塑级液态水银铬金流光标题 -->
+        <div class="text-center mb-10 sm:mb-16 select-none">
+          <h1 id="heroTitle" class="hero-title-sculpt chrome-liquid-text text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-[0.06em] py-2">
+            刘昊维出生20周年
+          </h1>
+        </div>
+
+        <!-- 四大具有物理光感跟随与光子流的倒计时卡片 (天 / 时 / 分 / 秒) -->
+        <div id="countdownGrid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full max-w-5xl">
+          
+          <!-- 1. 天数卡片 (DAYS) -->
+          <div class="card-specular-wrapper p-6 sm:p-9 flex flex-col items-center justify-center cursor-default">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="border-beam-container">
+              <div class="border-beam-streak"></div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center w-full">
+              <div class="flex items-baseline justify-center gap-1 mb-2">
+                <span id="heroDays" class="text-5xl sm:text-7xl lg:text-8xl font-light text-appleDark tracking-tight tabular-nums leading-none font-sans">
+                  ---
+                </span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-appleBlue/60"></span>
+                <span class="text-[11px] sm:text-xs font-mono uppercase tracking-[0.3em] text-appleGray font-medium">
+                  DAYS
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. 小时卡片 (HOURS) -->
+          <div class="card-specular-wrapper p-6 sm:p-9 flex flex-col items-center justify-center cursor-default">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="border-beam-container">
+              <div class="border-beam-streak" style="animation-delay: -1.75s;"></div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center w-full">
+              <div class="flex items-baseline justify-center gap-1 mb-2">
+                <span id="heroHours" class="text-5xl sm:text-7xl lg:text-8xl font-light text-appleDark tracking-tight tabular-nums leading-none font-sans">
+                  --
+                </span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-appleBlue/60"></span>
+                <span class="text-[11px] sm:text-xs font-mono uppercase tracking-[0.3em] text-appleGray font-medium">
+                  HOURS
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. 分钟卡片 (MINUTES) -->
+          <div class="card-specular-wrapper p-6 sm:p-9 flex flex-col items-center justify-center cursor-default">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="border-beam-container">
+              <div class="border-beam-streak" style="animation-delay: -3.5s;"></div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center w-full">
+              <div class="flex items-baseline justify-center gap-1 mb-2">
+                <span id="heroMinutes" class="text-5xl sm:text-7xl lg:text-8xl font-light text-appleDark tracking-tight tabular-nums leading-none font-sans">
+                  --
+                </span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-appleBlue/60"></span>
+                <span class="text-[11px] sm:text-xs font-mono uppercase tracking-[0.3em] text-appleGray font-medium">
+                  MINUTES
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. 秒数核心卡片 (SECONDS) -->
+          <div class="card-specular-wrapper p-6 sm:p-9 flex flex-col items-center justify-center cursor-default bg-blue-50/40">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="border-beam-container">
+              <div class="border-beam-streak" style="animation-delay: -5.25s;"></div>
+            </div>
+
+            <div class="relative z-10 flex flex-col items-center w-full">
+              <div class="flex items-baseline justify-center gap-1 mb-2">
+                <span id="heroSeconds" class="text-5xl sm:text-7xl lg:text-8xl font-normal text-appleBlue tracking-tight tabular-nums leading-none font-sans">
+                  --
+                </span>
+                <span class="micro-ticker ml-1"></span>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-appleBlue animate-ping"></span>
+                <span class="text-[11px] sm:text-xs font-mono uppercase tracking-[0.3em] text-appleBlue font-semibold">
+                  SECONDS
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 极简微弱下滑提示 -->
+        <div id="scrollHint" class="absolute bottom-8 flex flex-col items-center gap-2 transition-opacity duration-300">
+          <span class="text-[10px] font-mono tracking-[0.25em] text-appleBlue uppercase font-medium">SCROLL</span>
+          <svg class="w-4 h-4 text-appleBlue animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------
+           STAGE 2: 向下滑动展开的第二幕 (弱冠之年 · 心智跃迁)
+           ------------------------------------------------------ -->
+      <section id="sceneVision" class="absolute inset-0 flex flex-col items-center justify-center px-6 opacity-0 pointer-events-none will-change-transform z-10 max-w-5xl mx-auto">
+        <div class="text-center mb-10 sm:mb-14">
+          <span class="text-xs font-mono text-appleBlue uppercase tracking-[0.3em] block mb-2 font-semibold">CHAPTER 01</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-appleDark">二十弱冠 · 破界前行</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+          <!-- 维度 1 -->
+          <div id="visionCard1" class="card-specular-wrapper p-8 flex flex-col justify-between">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 rounded-2xl bg-blue-50/80 border border-blue-100 text-appleBlue flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-appleDark mb-2">心智笃定</h3>
+              <p class="text-sm text-appleGray leading-relaxed">
+                弱冠既加，如圭如璋。沉淀内省与专注，建立属于自己的逻辑世界与从容定力。
+              </p>
+            </div>
+            <div class="relative z-10 mt-8 pt-4 border-t border-black/[0.04] text-xs font-mono text-appleBlue">
+              DIMENSION · 01
+            </div>
+          </div>
+
+          <!-- 维度 2 -->
+          <div id="visionCard2" class="card-specular-wrapper p-8 flex flex-col justify-between bg-blue-50/30">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 rounded-2xl bg-white border border-blue-200 text-appleBlue flex items-center justify-center mb-6 shadow-sm">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-appleDark mb-2">广袤视野</h3>
+              <p class="text-sm text-appleGray leading-relaxed">
+                踏遍山川，遍历未知。在更宏大的时空维度里，探索可能性的极致边界。
+              </p>
+            </div>
+            <div class="relative z-10 mt-8 pt-4 border-t border-blue-100 text-xs font-mono text-appleBlue font-semibold">
+              DIMENSION · 02
+            </div>
+          </div>
+
+          <!-- 维度 3 -->
+          <div id="visionCard3" class="card-specular-wrapper p-8 flex flex-col justify-between">
+            <div class="specular-shine"></div>
+            <div class="border-specular"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 rounded-2xl bg-blue-50/80 border border-blue-100 text-appleBlue flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-appleDark mb-2">炽热满怀</h3>
+              <p class="text-sm text-appleGray leading-relaxed">
+                倾注专注，永远自驱。以纯粹的热爱去击碎平庸，二十岁自成一派气象。
+              </p>
+            </div>
+            <div class="relative z-10 mt-8 pt-4 border-t border-black/[0.04] text-xs font-mono text-appleBlue">
+              DIMENSION · 03
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------
+           STAGE 3: 向下滑动展开的第三幕 (时间印记与点亮仪式)
+           ------------------------------------------------------ -->
+      <section id="sceneAction" class="absolute inset-0 flex flex-col items-center justify-center px-6 opacity-0 pointer-events-none will-change-transform z-10 max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+          <span class="text-xs font-mono text-appleBlue uppercase tracking-[0.3em] block mb-2 font-semibold">CHAPTER 02</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-bold tracking-tight text-appleDark mb-3">为二十岁点亮荣光</h2>
+          <p class="text-sm sm:text-base text-appleGray font-sans">2007.02.25 — 2027.02.25 · 敬二十岁浩瀚征程</p>
+        </div>
+
+        <div class="card-specular-wrapper p-8 sm:p-12 w-full text-center relative overflow-hidden">
+          <div class="specular-shine"></div>
+          <div class="border-specular"></div>
+          
+          <div class="relative z-10 flex flex-col items-center">
+            <!-- 点亮庆典按钮 -->
+            <button id="celebrateBtn" class="inline-flex items-center gap-2.5 bg-appleBlue hover:bg-[#0077ED] active:scale-95 text-white font-medium px-9 py-4 rounded-full text-sm sm:text-base transition-all shadow-xl shadow-blue-500/25">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              <span>点亮二十岁蓝色彩带</span>
+            </button>
+
+            <!-- 祝福互动框 -->
+            <div class="w-full max-w-md mt-8">
+              <div class="flex gap-2">
+                <input id="wishInput" type="text" placeholder="写一句赠给刘昊维的20岁寄语..." maxlength="35" class="flex-1 bg-white border border-blue-200/70 focus:border-appleBlue focus:ring-4 focus:ring-blue-100 rounded-2xl px-4 py-2.5 text-sm text-appleDark outline-none transition-all" />
+                <button id="sendWishBtn" class="bg-appleDark hover:bg-black text-white text-xs sm:text-sm font-medium px-5 py-2.5 rounded-2xl transition-all active:scale-95">
+                  发送
+                </button>
+              </div>
+
+              <!-- 祝福标签 -->
+              <div id="wishTags" class="flex flex-wrap gap-2 mt-4 justify-center">
+                <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs bg-blue-50/90 text-appleBlue border border-blue-100">
+                  💙 弱冠之年，自成一派
+                </span>
+                <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs bg-blue-50/90 text-appleBlue border border-blue-100">
+                  ✨ 愿二十岁的你永远光芒万丈
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- 底部微版权 -->
+  <footer class="border-t border-black/[0.04] bg-white py-12 px-6 text-center text-xs text-appleGray">
+    刘昊维 · 出生20周年 · 2027年2月25日 00:00:00
+  </footer>
+
+  <!-- 蓝白色彩带 Canvas -->
+  <canvas id="confettiCanvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <script>
+    /* ========================================================
+       1. 倒计时高精计算引擎 (2027-02-25 00:00:00)
+       ======================================================== */
+    const targetDate = new Date('2027-02-25T00:00:00+08:00').getTime();
+    const elDays = document.getElementById('heroDays');
+    const elHours = document.getElementById('heroHours');
+    const elMinutes = document.getElementById('heroMinutes');
+    const elSeconds = document.getElementById('heroSeconds');
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        elDays.innerText = '000';
+        elHours.innerText = '00';
+        elMinutes.innerText = '00';
+        elSeconds.innerText = '00';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      elDays.innerText = String(days).padStart(3, '0');
+      elHours.innerText = String(hours).padStart(2, '0');
+      elMinutes.innerText = String(mins).padStart(2, '0');
+      elSeconds.innerText = String(secs).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ========================================================
+       2. 物理级指针高光跟随引擎 (Radial Specular Follow)
+       计算光标在每张卡片内的坐标，动态驱动 CSS 变量
+       ======================================================== */
+    const cards = document.querySelectorAll('.card-specular-wrapper');
+    
+    function updateCardSpecular(e) {
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    }
+    window.addEventListener('mousemove', updateCardSpecular, { passive: true });
+
+    // 针对移动端触摸点适配光感
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        updateCardSpecular(e.touches[0]);
+      }
+    }, { passive: true });
+
+    /* ========================================================
+       3. Apple 连续滚动视差系统 (Pinned Scrollytelling Engine)
+       丝滑向前推进，缩放、虚化、景深无缝过渡
+       ======================================================== */
+    const scrollTrack = document.getElementById('scrollTrack');
+    const scrollProgressBar = document.getElementById('scrollProgressBar');
+    const sceneHero = document.getElementById('sceneHero');
+    const heroTitle = document.getElementById('heroTitle');
+    const countdownGrid = document.getElementById('countdownGrid');
+    const scrollHint = document.getElementById('scrollHint');
+
+    const sceneVision = document.getElementById('sceneVision');
+    const visionCard1 = document.getElementById('visionCard1');
+    const visionCard2 = document.getElementById('visionCard2');
+    const visionCard3 = document.getElementById('visionCard3');
+
+    const sceneAction = document.getElementById('sceneAction');
+
+    function clamp(val, min, max) {
+      return Math.min(Math.max(val, min), max);
+    }
+
+    function onScroll() {
+      const rect = scrollTrack.getBoundingClientRect();
+      const totalScrollable = scrollTrack.offsetHeight - window.innerHeight;
+      const currentScroll = -rect.top;
+      const progress = clamp(currentScroll / totalScrollable, 0, 1);
+
+      // 顶部进度条
+      scrollProgressBar.style.width = `${progress * 100}%`;
+
+      /* 阶段 1: 首页核心平滑向上推入景深缩放 (0.0 -> 0.38) */
+      if (progress < 0.4) {
+        sceneHero.style.pointerEvents = 'auto';
+        const p1 = progress / 0.35; // 0 -> 1
+
+        const scale = 1 - p1 * 0.16;
+        const translateY = -p1 * 130;
+        const opacity = Math.max(0, 1 - p1 * 1.35);
+        const blur = p1 * 12;
+
+        sceneHero.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+        sceneHero.style.opacity = opacity;
+        sceneHero.style.filter = `blur(${blur}px)`;
+        scrollHint.style.opacity = Math.max(0, 1 - p1 * 3);
+      } else {
+        sceneHero.style.pointerEvents = 'none';
+        sceneHero.style.opacity = 0;
+      }
+
+      /* 阶段 2: 篇章一 3D 浮空卡片浮现与退出 (0.26 -> 0.74) */
+      if (progress >= 0.25 && progress <= 0.76) {
+        sceneVision.style.pointerEvents = 'auto';
+
+        const inProgress = clamp((progress - 0.27) / 0.16, 0, 1);
+        const outProgress = clamp((progress - 0.58) / 0.14, 0, 1);
+
+        const opacity = inProgress * (1 - outProgress);
+        const translateY = (1 - inProgress) * 90 - outProgress * 90;
+        const scale = 0.94 + inProgress * 0.06 - outProgress * 0.05;
+
+        sceneVision.style.opacity = opacity;
+        sceneVision.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+
+        // 视差微位移
+        visionCard1.style.transform = `translate3d(0, ${(1 - inProgress) * 35}px, 0)`;
+        visionCard2.style.transform = `translate3d(0, ${(1 - inProgress) * 12}px, 0)`;
+        visionCard3.style.transform = `translate3d(0, ${(1 - inProgress) * 45}px, 0)`;
+      } else {
+        sceneVision.style.pointerEvents = 'none';
+        sceneVision.style.opacity = 0;
+      }
+
+      /* 阶段 3: 篇章二 点亮仪式展开 (0.68 -> 1.0) */
+      if (progress > 0.66) {
+        sceneAction.style.pointerEvents = 'auto';
+        const p3 = clamp((progress - 0.68) / 0.22, 0, 1);
+
+        const translateY = (1 - p3) * 80;
+        const scale = 0.94 + p3 * 0.06;
+
+        sceneAction.style.opacity = p3;
+        sceneAction.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+      } else {
+        sceneAction.style.pointerEvents = 'none';
+        sceneAction.style.opacity = 0;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ========================================================
+       4. 蓝白色彩带粒子动画 (Pure Blue & White Confetti)
+       ======================================================== */
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const colors = ['#0071e3', '#2997ff', '#38bdf8', '#93c5fd', '#ffffff', '#e0edff'];
+
+    class Confetti {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 8 + 6;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.speedX = (Math.random() - 0.5) * 16;
+        this.speedY = Math.random() * -18 - 8;
+        this.gravity = 0.45;
+        this.rotation = Math.random() * 360;
+        this.rotationSpeed = (Math.random() - 0.5) * 14;
+        this.opacity = 1;
+        this.life = 1;
+        this.decay = Math.random() * 0.009 + 0.007;
+      }
+
+      update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.rotation += this.rotationSpeed;
+        this.life -= this.decay;
+        this.opacity = Math.max(0, this.life);
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+        ctx.restore();
+      }
+    }
+
+    function fireConfetti() {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight * 0.6;
+      for (let i = 0; i < 90; i++) {
+        particles.push(new Confetti(cx, cy));
+      }
+    }
+
+    function loopConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        if (particles[i].life <= 0) particles.splice(i, 1);
+      }
+      requestAnimationFrame(loopConfetti);
+    }
+    loopConfetti();
+
+    document.getElementById('celebrateBtn').addEventListener('click', fireConfetti);
+
+    /* ========================================================
+       5. 极简祝福互动
+       ======================================================== */
+    const wishInput = document.getElementById('wishInput');
+    const sendWishBtn = document.getElementById('sendWishBtn');
+    const wishTags = document.getElementById('wishTags');
+
+    function addWish(text) {
+      const tag = document.createElement('span');
+      tag.className = 'inline-flex items-center px-3.5 py-1.5 rounded-full text-xs bg-blue-50/90 text-appleBlue border border-blue-100';
+      tag.innerText = `💙 ${text}`;
+      wishTags.prepend(tag);
+    }
+
+    function handleSend() {
+      const val = wishInput.value.trim();
+      if (!val) return;
+      addWish(val);
+      wishInput.value = '';
+      fireConfetti();
+    }
+
+    sendWishBtn.addEventListener('click', handleSend);
+    wishInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleSend();
+    });
+  </script>
+</body>
+</html>
